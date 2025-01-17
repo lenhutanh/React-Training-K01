@@ -1,0 +1,161 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #457bd6, #9146b3);
+    padding: 10px;
+}
+
+.todo-app {
+    width: 100%;
+    max-width: 780px;
+    background: #fff;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+    margin: 50px auto;
+}
+
+.todo-app h1 {
+    font-size: 55px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.todo-app h1 img {
+    width: 45px;
+    margin-right: 15px;
+}
+
+.todo-app h2 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.todo-app h2.visible {
+    display: block;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.row input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: #edeef0;
+    font-size: 17px;
+    border-radius: 8px;
+    padding: 10px 10px 10px 30px;
+}
+
+.row button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #ff5945;
+    color: #fff;
+    padding: 16px 50px;
+    border-radius: 8px;
+    font-size: 17px;
+}
+
+.row button:hover {
+    background: #e04f3d;
+}
+
+ul li {
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    border-radius: 8px;
+    background-color: #edeef0;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 8px;
+}
+
+ul li:hover {
+    background-color: #dcdde0;
+}
+
+ul li .checkbox::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    background-image: url(src/assets/images/unchecked.png);
+    background-size: cover;
+    background-position: center;
+    top: 8px;
+    left: 8px;
+}
+
+ul li.checked {
+    .content {
+        color: #555;
+        text-decoration: line-through;
+    }
+}
+
+ul li.checked .checkbox::before {
+    background-image: url(src/assets/images/check.png);
+}
+
+ul li .content {
+    display: block;
+    word-wrap: break-word;
+    word-break: break-word; 
+    white-space: normal;
+    max-width: 600px; 
+}
+
+ul li input {
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+ul li .control {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    right: 10px;
+    top: 12px;
+
+    i:hover {
+        color: red;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 2px 5px;
+        border: none;
+        border-radius: 2px;
+    }
+
+    .save {
+        background-color: #ff5945;
+        color: #fff;
+    }
+
+    .cancel {
+        background-color: #b8b9bd;
+    }
+}
+
+ul li.dragging {
+    background-color: #f0f0f0;
+    opacity: 0.5;
+}
