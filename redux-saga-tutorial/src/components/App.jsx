@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createUserRequest, deleteUserRequest, getUsersRequest } from '../actions/users';
+import { createUserRequest, deleteUserRequest, getUsersRequest, usersError } from '../actions/users';
 import { useEffect } from 'react';
 import UsersList from './UsersList';
 import NewUserForm from './NewUserForm';
@@ -18,6 +18,10 @@ function App({ users, getUsersRequest, createUserRequest, deleteUserRequest}) {
 
   const handleDeleteUser = (userId) => {
     deleteUserRequest(userId);
+  }
+  
+  const handleCloseAlert = () => {
+    usersError('');
   }
   return (
     <>

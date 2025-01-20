@@ -9,8 +9,8 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.withCredentials = false;
+axios.defaults.baseURL = 'http://localhost:3000';
 
 const sagaMiddleware = createSagaMiddleware();
 
