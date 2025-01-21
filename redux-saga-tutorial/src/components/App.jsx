@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import { createUserRequest, deleteUserRequest, getUsersRequest, usersError } from '../actions/users';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import UsersList from './UsersList';
 import NewUserForm from './NewUserForm';
+import ModalEditUser from './ModalEditUser';
 
 function App({ users, getUsersRequest, createUserRequest, deleteUserRequest}) {
+
+  const [isShowModalEditUser, setIsShowModalEditUser] = useState(false);
+  const [dataUserEdit, setDataUserEdit] = useState({});
+
   useEffect(() => {
     getUsersRequest();
   }, [getUsersRequest]);
@@ -20,15 +25,23 @@ function App({ users, getUsersRequest, createUserRequest, deleteUserRequest}) {
     deleteUserRequest(userId);
   }
   
-  const handleCloseAlert = () => {
-    usersError('');
+  const handleEditUser = (user) => {
+    console.log(user);
+    setDataUserEdit(user);
+    setIsShowModalEditUser(true);
   }
+
   return (
     <>
       <div style={{margin: '0 auto', padding: '20px', maxWidth: '600px'}}>
         <NewUserForm onSubmit={handleSubmit}/>
-        <UsersList onDeleteUser={handleDeleteUser} users={users}/>
+        <UsersList onEditUser={handleEditUser} onDeleteUser={handleDeleteUser} users={users}/>
       </div>
+      <ModalEditUser
+        show={isShowModalEditUser}
+        handleClose={() => setIsShowModalEditUser(false)}
+        dataUserEdit={dataUserEdit}
+      />
     </>
   );
 }

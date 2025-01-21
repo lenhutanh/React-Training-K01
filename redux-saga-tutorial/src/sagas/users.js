@@ -54,10 +54,31 @@ function* watchDeleteUserRequest() {
         })
     }
 }
+
+function* editUser({user}) {
+    try {
+        yield call(api.editUser, user);
+        yield call(getUsers);
+    } catch (e) {
+        yield put(actions.usersError({
+            error: 'An error occurred when trying to edit the user'
+        }));
+    }
+}
+
+function* watchEditUserRequest() {
+    while(true) {
+        const action = yield take(actions.Types.EDIT_USER_REQUEST);
+        yield call(editUser, {
+            user: action.payload.user
+        })
+    }
+}
 const usersSagas = [
     fork(watchGetUsersRequest),
     fork(watchCreateUserRequest),
-    fork(watchDeleteUserRequest)
+    fork(watchDeleteUserRequest),
+    fork(watchEditUserRequest)
 ];
 
 export default usersSagas;
