@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'antd/dist/reset.css';
 
 axios.defaults.withCredentials = false;
 axios.defaults.baseURL = 'http://localhost:3000';

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { createUserRequest, deleteUserRequest, getUsersRequest, usersError } from '../actions/users';
 import { useEffect, useState } from 'react';
-import UsersList from './UsersList';
-import NewUserForm from './NewUserForm';
-import ModalEditUser from './ModalEditUser';
+import ModalEditUserAntd from './antd/ModalEditUserAntd';
+import NewUserFormAntd from './antd/NewUserFormAntd';
+import UsersListAntd from './antd/UserListAntd';
 
 function App({ users, getUsersRequest, createUserRequest, deleteUserRequest}) {
 
@@ -34,10 +34,10 @@ function App({ users, getUsersRequest, createUserRequest, deleteUserRequest}) {
   return (
     <>
       <div style={{margin: '0 auto', padding: '20px', maxWidth: '600px'}}>
-        <NewUserForm onSubmit={handleSubmit}/>
-        <UsersList onEditUser={handleEditUser} onDeleteUser={handleDeleteUser} users={users}/>
+        <NewUserFormAntd onSubmit={handleSubmit}/>
+        <UsersListAntd onEditUser={handleEditUser} onDeleteUser={handleDeleteUser} users={users}/>
       </div>
-      <ModalEditUser
+      <ModalEditUserAntd
         show={isShowModalEditUser}
         handleClose={() => setIsShowModalEditUser(false)}
         dataUserEdit={dataUserEdit}
