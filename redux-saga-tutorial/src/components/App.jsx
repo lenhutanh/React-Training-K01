@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createUserRequest, deleteUserRequest, getUsersRequest, usersError } from '../actions/users';
+import { createUserRequest, deleteUserRequest, getUsersRequest, usersError } from '../redux/actions/users';
 import { useEffect, useState } from 'react';
 import ModalEditUserAntd from './antd/ModalEditUserAntd';
 import NewUserFormAntd from './antd/NewUserFormAntd';

@@ -1,4 +1,4 @@
-import { Button, List } from "antd";
+import { Button, List, Popconfirm } from "antd";
 
 const UsersListAntd = ({ users, onDeleteUser, onEditUser }) => {
   const sortedUsers = users.sort((a, b) => {
@@ -25,9 +25,17 @@ const UsersListAntd = ({ users, onDeleteUser, onEditUser }) => {
             <Button type="default" onClick={() => onEditUser(user)}>
               Edit
             </Button>,
-            <Button danger type="primary" onClick={() => onDeleteUser(user.id)}>
-              Delete
-            </Button>,
+            <Popconfirm
+              title="Delete the user"
+              description="Are you sure to delete this user?"
+              onConfirm={() => onDeleteUser(user.id)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button danger type="primary">
+                Delete
+              </Button>
+            </Popconfirm>,
           ]}
         >
           <List.Item.Meta
