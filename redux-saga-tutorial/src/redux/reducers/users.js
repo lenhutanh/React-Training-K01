@@ -2,6 +2,7 @@ import { Types } from "../actions/users";
 
 const INITIAL_STATE = {
     items: [],
+    item: {},
     error: ''
 };
 
@@ -11,6 +12,12 @@ export default function users(state = INITIAL_STATE, action) {
             return {
                 ...state,
                 items: action.payload.items
+            }
+        }
+        case Types.GET_USER_BY_ID_SUCCESS: {
+            return {
+                ...state,
+                item: action.payload.item
             }
         }
         case Types.USERS_ERROR: {

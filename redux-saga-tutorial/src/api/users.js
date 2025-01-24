@@ -21,3 +21,7 @@ export const editUser = (user) => {
         lastName: user.lastName,
     });
 }
+
+export const getUserById = ({userId}) => {
+    return axios.get(`/users/${userId}`);
+}

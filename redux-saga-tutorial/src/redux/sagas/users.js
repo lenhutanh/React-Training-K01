@@ -1,6 +1,6 @@
 import { call, fork, put, take, takeEvery, takeLatest } from 'redux-saga/effects';
 import * as actions from  '../actions/users';
-import * as api from "../api/users"
+import * as api from "../../api/users"
 
 function* getUsers() {
     try {
@@ -57,6 +57,7 @@ function* watchDeleteUserRequest() {
 
 function* editUser({user}) {
     try {
+        console.log(user);
         yield call(api.editUser, user);
         yield call(getUsers);
     } catch (e) {
@@ -74,11 +75,29 @@ function* watchEditUserRequest() {
         })
     }
 }
+
+function* getUserById({payload}) {
+    try {
+        const {userId} = payload;
+        const result = yield call(api.getUserById, userId);
+        yield put(actions.getUserByIdSuccess({ item: result.data }));
+    } catch (e) {
+        yield put(actions.usersError({
+            error: 'An error occurred when trying to get the user'
+        }));
+    }
+}
+
+function* watchGetUserByIdRequest() {
+    yield takeLatest(actions.Types.GET_USER_BY_ID_REQUEST, getUserById)
+}
+
 const usersSagas = [
     fork(watchGetUsersRequest),
     fork(watchCreateUserRequest),
     fork(watchDeleteUserRequest),
-    fork(watchEditUserRequest)
+    fork(watchEditUserRequest),
+    fork(watchGetUserByIdRequest)
 ];
 
 export default usersSagas;
