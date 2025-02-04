@@ -79,6 +79,7 @@ function* watchEditUserRequest() {
 function* getUserById({payload}) {
     try {
         const {userId} = payload;
+        console.log(userId);
         const result = yield call(api.getUserById, userId);
         yield put(actions.getUserByIdSuccess({ item: result.data }));
     } catch (e) {
