@@ -12,7 +12,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 
 axios.defaults.withCredentials = false;
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
 
 const sagaMiddleware = createSagaMiddleware();
 

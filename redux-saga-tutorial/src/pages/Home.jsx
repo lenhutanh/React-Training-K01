@@ -5,15 +5,17 @@ import NewUserFormAntd from '../components/antd/NewUserFormAntd';
 import UsersListAntd from '../components/antd/UserListAntd';
 import ModalEditUserAntd from '../components/antd/ModalEditUserAntd';
 import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
+import { message, Spin } from 'antd';
+import useFetch from '../hooks/useFetch';
 
-function Home({ users, getUsersRequest, createUserRequest, deleteUserRequest}) {
+function Home({ getUsersRequest, createUserRequest, deleteUserRequest}) {
 
     const navigate = useNavigate();
-    useEffect(() => {
-        getUsersRequest();
-    }, [getUsersRequest]);
+    // useEffect(() => {
+    //     getUsersRequest();
+    // }, [getUsersRequest]);
 
+    const { data, isLoading, error} = useFetch('https://jsonplaceholder.typicode.com/users');
     const handleSubmit = ({firstName, lastName}) => {
       createUserRequest({
         firstName,
@@ -34,19 +36,32 @@ function Home({ users, getUsersRequest, createUserRequest, deleteUserRequest}) {
   return (
     <>
       <div style={{margin: '0 auto', padding: '20px', maxWidth: '600px'}}>
-        <NewUserFormAntd onSubmit={handleSubmit}/>
-        <UsersListAntd onEditUser={handleEditUser} onDeleteUser={handleDeleteUser} users={users}/>
+        {/* <NewUserFormAntd onSubmit={handleSubmit}/> */}
+        {isLoading ? (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh'}}
+          >
+            <Spin size='large'/>
+          </div>
+        ) : (
+          <UsersListAntd onEditUser={handleEditUser} onDeleteUser={handleDeleteUser} users={data}/>
+        )}
       </div>
     </>
   );
 }
 
-const mapStateToProps = (state) => ({
-  users: state.users.items,
-});
+// const mapStateToProps = (state) => ({
+//   users: state.users.items,
+// });
 
-export default connect(mapStateToProps, { 
-  getUsersRequest, 
-  createUserRequest,
-  deleteUserRequest
-})(Home);
+// export default connect(mapStateToProps, { 
+//   getUsersRequest, 
+//   createUserRequest,
+//   deleteUserRequest
+// })(Home);
+
+export default Home;

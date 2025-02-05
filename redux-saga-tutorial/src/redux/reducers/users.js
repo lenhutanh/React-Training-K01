@@ -2,7 +2,12 @@ import { Types } from "../actions/users";
 
 const INITIAL_STATE = {
     items: [],
-    item: {},
+    item: { 
+        address: {
+            geo: {}
+        }, 
+        company: {}
+    },
     error: ''
 };
 
